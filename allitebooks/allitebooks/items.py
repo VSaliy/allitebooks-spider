@@ -8,7 +8,11 @@
 import scrapy
 
 
-class AllitebooksItem(scrapy.Item):
+class BookItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    name = scrapy.Field()
+    auth = scrapy.Field()
+    isbn = scrapy.Field()
+    image = scrapy.Field()
+    description = scrapy.Field()
+    pdf_url = scrapy.Field()
