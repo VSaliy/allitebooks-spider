@@ -25,9 +25,9 @@ class AllITEBooksSpider(scrapy.Spider):
     def parse_book_page(self, response):
         book = BookItem()
         book['name'] = response.xpath('//h1[@class="single-title"]/text()').extract()[0]
-        book['auth'] = response.xpath('//div[@class="book-detail"]//dd[1]').extract()[0]
-        book['isbn'] = response.xpath('//div[@class="book-detail"]//dd[2]').extract()[0]
+        book['auth'] = response.xpath('//div[@class="book-detail"]//dd[1]/a/text()').extract()[0]
+        book['isbn'] = response.xpath('//div[@class="book-detail"]//dd[2]/text()').extract()[0]
         book['image'] = response.xpath('//div[@class="entry-body-thumbnail hover-thumb"]//img/@src').extract()[0]
-        book['description'] = response.xpath('//div[@class="entry-content"]').extract()[0]
+        book['description'] = "".join(response.xpath('//div[@class="entry-content"]/p/text()').extract())
         book['pdf_url'] = response.xpath('//span[@class="download-links"][1]/a/@href').extract()[0]
         yield book
